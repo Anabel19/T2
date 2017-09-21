@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>Curso</title>
+  
+  <body>
+  <script>
+var alumno = {
+ "nombre" : "Juan",
+ "edad" : 17,
+ "cursos": [
+   {
+     "codigo" : "A34",
+     "nombre" : "Algoritmos"
+   },
+   {
+     "codigo" : "B34",
+     "nombre" : "Base de Datos"
+   }
+ ],
+ "direccion" : {
+   "tipo": "Calle"
+ }
+};
+
+function Save() {
+  document.getElementById("frm").submit();
+}
+function Cancel() {
+
+}
+  </script>
+ </head>
+
+   <form id="frm">
+      Curso:<input type="text" name="cname"><br>
+      Codigo:<input type="text" name="code"><br>
+      <input type="button" onclick="Save()" value="Save">
+      <input type="button" onclick="Cancel()" value="Cancel">
+   </form>
+   
+ </body>
+</html>
+

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>Curso</title>
+  
+  <body>
+  <script>
+var alumno = {
+ "nombre" : "Juan",
+ "edad" : 17,
+ "cursos": [
+   {
+     "codigo" : "A34",
+	 "nombre" : "Algoritmos"
+   },
+   {
+     "codigo" : "B34",
+	 "nombre" : "Base de Datos"
+   }
+ ],
+ "direccion" : {
+   "tipo": "Calle"
+ }
+};
+
+function verResultado() {
+  var out = document.getElementById("output");
+  var table = document.createElement("TABLE");
+  var trNombre = document.createElement("TR");
+  var trEdad = document.createElement("TR");
+  var trCursos = document.createElement("TR");
+
+  table.border = "1";
+
+  var td1 = document.createElement("TD");
+  var td2 = document.createElement("TD");
+  td1.innerText = "Nombre:";
+  td2.innerText = alumno.nombre;
+  trNombre.appendChild(td1);
+  trNombre.appendChild(td2);
+
+  td1 = document.createElement("TD");
+  td2 = document.createElement("TD");
+  td1.innerText = "Edad:";
+  td2.innerText = alumno.edad;
+  trEdad.appendChild(td1);
+  trEdad.appendChild(td2);
+
+  td1 = document.createElement("TD");
+  td2 = document.createElement("TD");
+  td1.innerText = "Cursos:";
+  var ulCursos = document.createElement("UL");
+  for (var i=0; i<alumno.cursos.length; i++) {
+	var liCurso = document.createElement("LI");
+        var a = document.createElement('a');
+        
+    	a.innerHTML = alumno.cursos[i].nombre;
+  	a.href = '#';
+  	a.id = i;
+    	a.addEventListener("click", function(){
+  		mostrar(this.id);
+	}, false);
+	
+	liCurso.appendChild(a);
+	ulCursos.appendChild(liCurso);
+	liCurso.id = "curso-" + i; 
+  }
+  td2.appendChild(ulCursos);
+  trCursos.appendChild(td1);
+  trCursos.appendChild(td2);
+
+  table.appendChild(trNombre);
+  table.appendChild(trEdad);
+  table.appendChild(trCursos);
+  out.innerHTML = "";
+  out.appendChild(table);
+}
+
+function compare(i, cod, nom)
+{
+	alumno.cursos[i].codigo = cod;
+	alumno.cursos[i].nombre = nom;
+	verResultado();
+}
+
+function mostrar(id)
+{
+  var out = document.getElementById("output");
+  var form = document.createElement("FORM");
+
+  var ICode = document.createElement("INPUT");
+  var IName = document.createElement("INPUT");
+  var buttonSubmit = document.createElement("BUTTON");
+  var buttonCancel = document.createElement("BUTTON");
+  var a1 = document.createElement("A");
+  var a2 = document.createElement("A");
+  var br1 = document.createElement("BR");
+  var br2 = document.createElement("BR");
+
+
+  ICode.type = "text";
+  ICode.name = "codigo";
+  ICode.value = alumno.cursos[id].codigo;
+  IName.type = "text";
+  IName.name = "nombre_curso";
+  IName.value = alumno.cursos[id].nombre;
+
+  buttonSubmit.type = "button";
+  buttonSubmit.innerText = "Save";
+
+
+  buttonSubmit.addEventListener("click", function()
+  {
+  		compare(id, ICode.value, IName.value);
+		  verResultado();
+	}, false);
+
+  buttonCancel.type = "button";
+  buttonCancel.innerText = "Cancel";
+
+
+  buttonCancel.addEventListener("click", function()
+  {
+		verResultado();
+	}, false);
+
+  
+  form.appendChild(ICode);
+  form.appendChild(br1);
+  form.appendChild(IName);
+  form.appendChild(br2);
+  form.appendChild(buttonSubmit);
+  form.appendChild(buttonCancel);
+  out.appendChild(form);
+}
+  </script>
+ </head>
+
+ 
+   <button onclick="verResultado()">Ver Resultado</button>
+   <div id="output" style="margin: 10px; padding: 5px;"></div>
+   
+ </body>
+</html>
